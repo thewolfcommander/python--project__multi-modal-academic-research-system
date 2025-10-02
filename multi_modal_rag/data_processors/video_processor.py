@@ -1,14 +1,16 @@
 # multi_modal_rag/data_processors/video_processor.py
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from PIL import Image
 from typing import List, Dict
 
 class VideoProcessor:
     """Process video content for key frames and visual analysis"""
-    
+
     def __init__(self, gemini_api_key: str):
-        genai.configure(api_key=gemini_api_key)
-        self.model = genai.GenerativeModel('gemini-pro')
+        # Use newer Gemini SDK
+        self.client = genai.Client(api_key=gemini_api_key)
+        self.model = "gemini-2.0-flash"  # Free tier model
         
     def extract_key_frames(self, video_url: str, num_frames: int = 10) -> List[Image.Image]:
         """
@@ -42,5 +44,16 @@ class VideoProcessor:
         Format as structured JSON.
         """
         
-        response = self.model.generate_content(prompt)
+        # Use new SDK pattern
+        contents = [
+            types.Content(
+                role="user",
+                parts=[types.Part.from_text(text=prompt)],
+            ),
+        ]
+
+        response = self.client.models.generate_content(
+            model=self.model,
+            contents=contents,
+        )
         return response.text

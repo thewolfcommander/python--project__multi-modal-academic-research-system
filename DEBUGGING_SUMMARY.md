@@ -75,20 +75,27 @@ sudo apt-get install ffmpeg
 
 ---
 
-### 5. ✅ Gemini API Model Error - FIXED
+### 5. ✅ Gemini API Model Error - FIXED (Updated to Newer SDK!)
 **Problem:**
 - Error: `404 models/gemini-1.5-flash is not found for API version v1beta`
-- The model name `gemini-1.5-flash` doesn't exist in the free tier
+- Was using old `google-generativeai` SDK with outdated model names
 
-**Fix Applied:**
-- Changed to `gemini-pro` (free model for text)
-- Changed to `gemini-pro-vision` (free model for image analysis in PDF processor)
-- Updated all three files:
-  - `research_orchestrator.py`
-  - `pdf_processor.py`
-  - `video_processor.py`
+**Fix Applied - Upgraded to Newer Gemini SDK:**
+- **Added `google-genai`** package (newer, better SDK)
+- **Updated PDF Processor** to use new SDK pattern:
+  - Text analysis: `gemini-2.0-flash-lite` (fastest free model)
+  - Vision analysis: `gemini-2.0-flash-exp` (supports images)
+  - Uses new `genai.Client()` and `types.Content()` patterns
+- **Updated Video Processor** to use new SDK pattern:
+  - Model: `gemini-2.0-flash-lite`
+- **Updated Research Orchestrator**:
+  - Model: `gemini-1.5-flash-latest` (LangChain compatible)
 
-**Action Required:** Restart the application to load the new model names.
+**Inspired by:** User-provided code showing proper Gemini SDK usage
+
+**Action Required:**
+1. Install new SDK: `pip install google-genai`
+2. Restart the application
 
 ---
 

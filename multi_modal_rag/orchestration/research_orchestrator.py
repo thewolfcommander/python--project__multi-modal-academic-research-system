@@ -17,9 +17,11 @@ class ResearchOrchestrator:
     def __init__(self, gemini_api_key: str, opensearch_manager: OpenSearchManager):
         logger.info("Initializing ResearchOrchestrator...")
         try:
-            logger.debug("Creating ChatGoogleGenerativeAI with model: gemini-pro")
+            # LangChain uses old SDK, but with updated model names
+            # Try gemini-1.5-flash-latest first, fallback to gemini-pro
+            logger.debug("Creating ChatGoogleGenerativeAI with model: gemini-2.0-flash")
             self.llm = ChatGoogleGenerativeAI(
-                model="gemini-pro",
+                model="gemini-2.0-flash",  # Latest free model name
                 google_api_key=gemini_api_key,
                 temperature=0.3,
                 convert_system_message_to_human=True

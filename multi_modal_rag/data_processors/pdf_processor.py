@@ -1,5 +1,7 @@
 # multi_modal_rag/data_processors/pdf_processor.py
-import google.generativeai as genai
+import os
+from google import genai
+from google.genai import types
 from pypdf import PdfReader
 import base64
 from PIL import Image
@@ -9,12 +11,13 @@ import io
 
 class PDFProcessor:
     """Process PDFs with diagrams using Gemini"""
-    
+
     def __init__(self, gemini_api_key: str):
-        genai.configure(api_key=gemini_api_key)
-        # Use gemini-pro for text, gemini-pro-vision for images
-        self.text_model = genai.GenerativeModel('gemini-pro')
-        self.vision_model = genai.GenerativeModel('gemini-pro-vision')
+        # Use newer Gemini SDK
+        self.client = genai.Client(api_key=gemini_api_key)
+        # Use free Gemini models - flash-lite is the fastest free tier
+        self.text_model = "gemini-2.0-flash"
+        self.vision_model = "gemini-2.0-flash-exp"  # Supports vision
         
     def extract_text_and_images(self, pdf_path: str) -> Dict:
         """
@@ -89,13 +92,24 @@ class PDFProcessor:
             Provide response in clear sections.
             """
 
-            text_response = self.text_model.generate_content(text_prompt)
-            analysis['summary'] = text_response.text
+            # Use new SDK pattern
+            contents = [
+                types.Content(
+                    role="user",
+                    parts=[types.Part.from_text(text=text_prompt)],
+                ),
+            ]
+
+            response = self.client.models.generate_content(
+                model=self.text_model,
+                contents=contents,
+            )
+            analysis['summary'] = response.text
 
             # Extract key concepts from response (simple extraction)
-            if text_response.text:
+            if response.text:
                 # Simple extraction - split by common delimiters
-                lines = text_response.text.split('\n')
+                lines = response.text.split('\n')
                 for line in lines:
                     if any(keyword in line.lower() for keyword in ['concept:', 'key:', '-', '•']):
                         concept = line.strip('- •*').strip()
@@ -113,7 +127,29 @@ class PDFProcessor:
                     4. Extract any text or labels from the image
                     """
 
-                    img_response = self.vision_model.generate_content([image_prompt, img_data['image']])
+                    # Convert PIL image to bytes for the new SDK
+                    img_bytes = io.BytesIO()
+                    img_data['image'].save(img_bytes, format='PNG')
+                    img_bytes = img_bytes.getvalue()
+
+                    # Use new SDK pattern for vision
+                    contents = [
+                        types.Content(
+                            role="user",
+                            parts=[
+                                types.Part.from_text(text=image_prompt),
+                                types.Part.from_bytes(
+                                    data=img_bytes,
+                                    mime_type="image/png"
+                                ),
+                            ],
+                        ),
+                    ]
+
+                    img_response = self.client.models.generate_content(
+                        model=self.vision_model,
+                        contents=contents,
+                    )
 
                     analysis['diagram_descriptions'].append({
                         'page': img_data['page'],
