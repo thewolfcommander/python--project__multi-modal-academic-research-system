@@ -1,8 +1,7 @@
 # multi_modal_rag/data_processors/video_processor.py
-from tkinter import Image
-import cv2
+import google.generativeai as genai
+from PIL import Image
 from typing import List, Dict
-import numpy as np
 
 class VideoProcessor:
     """Process video content for key frames and visual analysis"""

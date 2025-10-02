@@ -9,15 +9,29 @@ class OpenSearchManager:
     
     def __init__(self, host: str = 'localhost', port: int = 9200):
         # For free tier, you can use OpenSearch locally via Docker
-        self.client = OpenSearch(
-            hosts=[{'host': host, 'port': port}],
-            http_compress=True,
-            use_ssl=False,
-            verify_certs=False,
-            ssl_assert_hostname=False,
-            ssl_show_warn=False,
-        )
-        
+        self.host = host
+        self.port = port
+        self.client = None
+        self.connected = False
+
+        try:
+            self.client = OpenSearch(
+                hosts=[{'host': host, 'port': port}],
+                http_compress=True,
+                use_ssl=False,
+                verify_certs=False,
+                ssl_assert_hostname=False,
+                ssl_show_warn=False,
+                timeout=5
+            )
+            # Test connection
+            self.client.info()
+            self.connected = True
+            print(f"✅ Connected to OpenSearch at {host}:{port}")
+        except Exception as e:
+            print(f"⚠️  OpenSearch not available at {host}:{port}: {e}")
+            print("   App will run with limited search functionality")
+
         # Embedding model for semantic search
         self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         
@@ -25,6 +39,10 @@ class OpenSearchManager:
         """
         Create index with proper mappings for multi-modal content
         """
+        if not self.connected:
+            print(f"⚠️  Cannot create index - OpenSearch not connected")
+            return False
+
         index_body = {
             'settings': {
                 'index': {
@@ -78,6 +96,10 @@ class OpenSearchManager:
         """
         Index a single document with embeddings
         """
+        if not self.connected:
+            print(f"⚠️  Cannot index document - OpenSearch not connected")
+            return None
+
         # Generate embedding for searchable content
         searchable_text = f"{document.get('title', '')} {document.get('abstract', '')} {document.get('content', '')[:1000]}"
         embedding = self.embedding_model.encode(searchable_text).tolist()
@@ -95,6 +117,10 @@ class OpenSearchManager:
         """
         Bulk index multiple documents
         """
+        if not self.connected:
+            print(f"⚠️  Cannot bulk index - OpenSearch not connected")
+            return None
+
         actions = []
         
         for doc in documents:
@@ -115,6 +141,10 @@ class OpenSearchManager:
         """
         Perform hybrid search (keyword + semantic)
         """
+        if not self.connected:
+            print(f"⚠️  Cannot search - OpenSearch not connected")
+            return []
+
         # Generate query embedding
         query_embedding = self.embedding_model.encode(query).tolist()
         
