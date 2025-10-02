@@ -24,10 +24,18 @@ docker run -p 9200:9200 -e "discovery.type=single-node" opensearchproject/opense
 ```
 
 ### Starting the Application
+
+**Main Application:**
 ```bash
 python main.py
 ```
 This launches a Gradio UI on `http://localhost:7860` with a public share link.
+
+**Visualization API Server (Optional):**
+```bash
+python start_api_server.py
+```
+This starts a FastAPI server on `http://localhost:8000` for advanced data visualization and API access.
 
 ## Architecture
 
@@ -49,7 +57,19 @@ This launches a Gradio UI on `http://localhost:7860` with a public share link.
    - Uses `SentenceTransformer('all-MiniLM-L6-v2')` for embeddings (384 dimensions)
    - Supports kNN vector search combined with traditional text search
 
-4. **Orchestration** (`multi_modal_rag/orchestration/`)
+4. **Database** (`multi_modal_rag/database/`)
+   - `db_manager.py`: SQLite database manager for tracking collected data
+   - Stores metadata for all collected papers, videos, and podcasts
+   - Tracks indexing status and collection statistics
+   - Schema includes: collections, papers, videos, podcasts, collection_stats tables
+
+5. **API** (`multi_modal_rag/api/`)
+   - `api_server.py`: FastAPI server providing REST endpoints
+   - Endpoints: `/api/collections`, `/api/statistics`, `/api/search`
+   - Web visualization dashboard at `/viz`
+   - Interactive HTML/CSS/JavaScript dashboard for data exploration
+
+6. **Orchestration** (`multi_modal_rag/orchestration/`)
    - `research_orchestrator.py`: Main query pipeline using LangChain
      - Retrieves relevant documents via hybrid search
      - Formats context with citations
@@ -57,12 +77,13 @@ This launches a Gradio UI on `http://localhost:7860` with a public share link.
      - Tracks conversation memory
    - `citation_tracker.py`: Manages citation tracking and bibliography export
 
-5. **UI** (`multi_modal_rag/ui/`)
+7. **UI** (`multi_modal_rag/ui/`)
    - `gradio_app.py`: Multi-tab Gradio interface
      - Research: Query system with citation tracking
      - Data Collection: Collect content from sources
      - Citation Manager: View and export citations
      - Settings: Configure OpenSearch and API keys
+     - Data Visualization: View collection statistics and data tables
 
 ### Key Design Patterns
 
@@ -74,12 +95,15 @@ This launches a Gradio UI on `http://localhost:7860` with a public share link.
 
 **Gemini Vision Integration**: PDFs are processed to extract diagrams, which Gemini Vision analyzes to provide textual descriptions that become searchable.
 
+**Collection Tracking**: All collected data is automatically tracked in a SQLite database with metadata, enabling visualization and analytics. The database records collection date, source, indexing status, and type-specific details.
+
 ## Data Storage
 
 - `data/papers/`: Downloaded PDFs from academic sources
 - `data/videos/`: Video metadata and transcripts
 - `data/podcasts/`: Podcast episode data
 - `data/processed/`: Processed content ready for indexing
+- `data/collections.db`: SQLite database tracking all collected data with metadata
 - `configs/`: Configuration files (currently empty)
 - `logs/`: Application logs (currently empty)
 
@@ -97,12 +121,55 @@ Key fields:
 - `embedding`: kNN vector (384 dimensions)
 - `citations`: Nested objects with text and source
 
+## SQLite Database Schema
+
+Database file: `data/collections.db`
+
+Key tables:
+- `collections`: Main table tracking all collected items
+  - Fields: id, content_type, title, source, url, collection_date, metadata, status, indexed
+- `papers`: Paper-specific details (arxiv_id, abstract, authors, categories, pdf_path)
+- `videos`: Video-specific details (video_id, channel, duration, views, thumbnail_url)
+- `podcasts`: Podcast-specific details (episode_id, podcast_name, audio_url, duration)
+- `collection_stats`: Collection operation statistics (content_type, query, results_count, source_api)
+
+## Data Visualization
+
+### Gradio UI Tab
+- View collection statistics (total, by type, indexed/not indexed)
+- Browse recent collections with filtering
+- Export data tables
+- Link to external visualization dashboard
+
+### FastAPI Visualization Dashboard
+Access at `http://localhost:8000/viz` (requires `python start_api_server.py`)
+
+Features:
+- Real-time statistics cards (total collections, by type, indexed status)
+- Interactive data table with search and filtering
+- Pagination for large datasets
+- Content type filtering (papers, videos, podcasts)
+- Direct links to source URLs
+- Auto-refresh statistics
+
+### API Endpoints
+- `GET /api/collections`: List all collections (with pagination and filtering)
+- `GET /api/collections/{id}`: Get detailed collection information
+- `GET /api/statistics`: Get database statistics
+- `GET /api/search?q={query}`: Search collections by title or source
+- `GET /viz`: Web visualization dashboard
+- `GET /health`: Health check endpoint
+- `GET /docs`: Auto-generated API documentation (Swagger UI)
+
 ## Dependencies
 
 Core libraries:
 - **LangChain**: Orchestration framework with Google Gemini integration
 - **OpenSearch**: Vector and text search
 - **Gradio**: Web UI framework
+- **FastAPI**: REST API framework for visualization endpoints
+- **Uvicorn**: ASGI server for FastAPI
+- **SQLite3**: Built-in Python database for collection tracking
 - **Google Generative AI**: Gemini Pro and Gemini Vision models
 - **sentence-transformers**: Embedding generation
 - **PyPDF/PyMuPDF**: PDF processing

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Data Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .content-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        select, input, button {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #5568d3;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-paper {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-video {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .badge-podcast {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .badge-indexed {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .badge-not-indexed {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .link {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Research Data Visualization</h1>
+            <p class="subtitle">Track and visualize your collected academic content</p>
+        </header>
+
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Collections</h3>
+                <div class="stat-value" id="total-count">-</div>
+                <div class="stat-label">All content types</div>
+            </div>
+            <div class="stat-card">
+                <h3>Papers</h3>
+                <div class="stat-value" id="paper-count">-</div>
+                <div class="stat-label">Academic papers</div>
+            </div>
+            <div class="stat-card">
+                <h3>Videos</h3>
+                <div class="stat-value" id="video-count">-</div>
+                <div class="stat-label">YouTube lectures</div>
+            </div>
+            <div class="stat-card">
+                <h3>Podcasts</h3>
+                <div class="stat-value" id="podcast-count">-</div>
+                <div class="stat-label">Podcast episodes</div>
+            </div>
+            <div class="stat-card">
+                <h3>Indexed</h3>
+                <div class="stat-value" id="indexed-count">-</div>
+                <div class="stat-label">In OpenSearch</div>
+            </div>
+            <div class="stat-card">
+                <h3>Recent (7 days)</h3>
+                <div class="stat-value" id="recent-count">-</div>
+                <div class="stat-label">New collections</div>
+            </div>
+        </div>
+
+        <!-- Data Table Section -->
+        <div class="content-section">
+            <h2>Collection Data</h2>
+
+            <div class="controls">
+                <select id="type-filter">
+                    <option value="">All Types</option>
+                    <option value="paper">Papers</option>
+                    <option value="video">Videos</option>
+                    <option value="podcast">Podcasts</option>
+                </select>
+
+                <input type="text" id="search-input" class="search-box" placeholder="Search by title or source...">
+                <button onclick="searchCollections()">🔍 Search</button>
+                <button onclick="loadCollections()">🔄 Refresh</button>
+            </div>
+
+            <div id="data-container">
+                <div class="loading">Loading data...</div>
+            </div>
+
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api';
+        let currentPage = 0;
+        const pageSize = 50;
+
+        // Load statistics
+        async function loadStatistics() {
+            try {
+                const response = await fetch(`${API_BASE}/statistics`);
+                const data = await response.json();
+
+                // Update stat cards
+                const byType = data.by_type || {};
+                document.getElementById('total-count').textContent =
+                    Object.values(byType).reduce((sum, count) => sum + count, 0);
+                document.getElementById('paper-count').textContent = byType.paper || 0;
+                document.getElementById('video-count').textContent = byType.video || 0;
+                document.getElementById('podcast-count').textContent = byType.podcast || 0;
+                document.getElementById('indexed-count').textContent = data.indexed || 0;
+                document.getElementById('recent-count').textContent = data.recent_7_days || 0;
+            } catch (error) {
+                console.error('Error loading statistics:', error);
+            }
+        }
+
+        // Load collections
+        async function loadCollections() {
+            const container = document.getElementById('data-container');
+            container.innerHTML = '<div class="loading">Loading collections...</div>';
+
+            const typeFilter = document.getElementById('type-filter').value;
+            const offset = currentPage * pageSize;
+
+            try {
+                let url = `${API_BASE}/collections?limit=${pageSize}&offset=${offset}`;
+                if (typeFilter) {
+                    url += `&content_type=${typeFilter}`;
+                }
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                displayCollections(data.collections);
+                updatePagination(data.count);
+            } catch (error) {
+                container.innerHTML = `<div class="error">Error loading data: ${error.message}</div>`;
+            }
+        }
+
+        // Search collections
+        async function searchCollections() {
+            const searchInput = document.getElementById('search-input').value.trim();
+            if (!searchInput) {
+                loadCollections();
+                return;
+            }
+
+            const container = document.getElementById('data-container');
+            container.innerHTML = '<div class="loading">Searching...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/search?q=${encodeURIComponent(searchInput)}&limit=100`);
+                const data = await response.json();
+
+                displayCollections(data.results);
+                document.getElementById('pagination').innerHTML = '';
+            } catch (error) {
+                container.innerHTML = `<div class="error">Error searching: ${error.message}</div>`;
+            }
+        }
+
+        // Display collections in table
+        function displayCollections(collections) {
+            const container = document.getElementById('data-container');
+
+            if (collections.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                        <h3>No data found</h3>
+                        <p>Start collecting data to see it here</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Source</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            collections.forEach(item => {
+                const date = new Date(item.collection_date).toLocaleDateString();
+                const typeClass = `badge-${item.content_type}`;
+                const statusClass = item.indexed ? 'badge-indexed' : 'badge-not-indexed';
+                const statusText = item.indexed ? 'Indexed' : 'Not Indexed';
+
+                html += `
+                    <tr>
+                        <td>${item.id}</td>
+                        <td><span class="badge ${typeClass}">${item.content_type}</span></td>
+                        <td>${escapeHtml(item.title)}</td>
+                        <td>${escapeHtml(item.source || 'N/A')}</td>
+                        <td><span class="badge ${statusClass}">${statusText}</span></td>
+                        <td>${date}</td>
+                        <td>
+                            ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" class="link">View</a>` : 'N/A'}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Update pagination
+        function updatePagination(totalCount) {
+            const pagination = document.getElementById('pagination');
+            const totalPages = Math.ceil(totalCount / pageSize);
+
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            if (currentPage > 0) {
+                html += `<button onclick="changePage(${currentPage - 1})">← Previous</button>`;
+            }
+
+            html += `<span>Page ${currentPage + 1} of ${totalPages}</span>`;
+
+            if (currentPage < totalPages - 1) {
+                html += `<button onclick="changePage(${currentPage + 1})">Next →</button>`;
+            }
+
+            pagination.innerHTML = html;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            loadCollections();
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Event listeners
+        document.getElementById('type-filter').addEventListener('change', () => {
+            currentPage = 0;
+            loadCollections();
+        });
+
+        document.getElementById('search-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchCollections();
+            }
+        });
+
+        // Initial load
+        loadStatistics();
+        loadCollections();
+
+        // Refresh every 30 seconds
+        setInterval(() => {
+            loadStatistics();
+        }, 30000);
+    </script>
+</body>
+</html>

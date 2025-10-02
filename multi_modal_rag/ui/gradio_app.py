@@ -4,17 +4,19 @@ import gradio as gr
 from typing import List, Tuple
 import json
 from multi_modal_rag.logging_config import get_logger
+from multi_modal_rag.database import CollectionDatabaseManager
 
 logger = get_logger(__name__)
 
 class ResearchAssistantUI:
     """Gradio UI for the Research Assistant"""
 
-    def __init__(self, orchestrator, citation_tracker, data_collectors, opensearch_manager=None):
+    def __init__(self, orchestrator, citation_tracker, data_collectors, opensearch_manager=None, db_manager=None):
         self.orchestrator = orchestrator
         self.citation_tracker = citation_tracker
         self.data_collectors = data_collectors
         self.opensearch_manager = opensearch_manager
+        self.db_manager = db_manager or CollectionDatabaseManager()
         self.collected_data = []  # Store collected data for indexing
         logger.info("ResearchAssistantUI initialized")
         
@@ -142,7 +144,52 @@ class ResearchAssistantUI:
                                 label="Status",
                                 lines=5
                             )
-            
+
+                # Data Visualization Tab
+                with gr.TabItem("Data Visualization"):
+                    with gr.Row():
+                        with gr.Column():
+                            gr.Markdown("### Collection Statistics")
+                            stats_display = gr.JSON(label="Statistics")
+                            refresh_stats_btn = gr.Button("🔄 Refresh Statistics")
+
+                            gr.Markdown("### Quick Stats")
+                            quick_stats = gr.Markdown("")
+
+                        with gr.Column():
+                            gr.Markdown("### Recent Collections")
+                            content_type_filter = gr.Radio(
+                                ["All", "Papers", "Videos", "Podcasts"],
+                                value="All",
+                                label="Filter by Type"
+                            )
+                            limit_slider = gr.Slider(
+                                minimum=10,
+                                maximum=100,
+                                value=20,
+                                step=10,
+                                label="Number of Items"
+                            )
+                            refresh_collections_btn = gr.Button("📊 Load Collections")
+
+                    collections_table = gr.Dataframe(
+                        headers=["ID", "Type", "Title", "Source", "Indexed", "Date"],
+                        label="Collection Data",
+                        wrap=True
+                    )
+
+                    gr.Markdown("### External Visualization")
+                    gr.Markdown("""
+                        For advanced visualization with charts and filtering, visit the FastAPI dashboard:
+
+                        **[Open Visualization Dashboard](http://localhost:8000/viz)** (Start FastAPI server first)
+
+                        To start the FastAPI server, run:
+                        ```bash
+                        python -m uvicorn multi_modal_rag.api.api_server:app --host 0.0.0.0 --port 8000
+                        ```
+                    """)
+
             # Event handlers
             search_btn.click(
                 fn=self.handle_search,
@@ -173,7 +220,19 @@ class ResearchAssistantUI:
                 inputs=[index_name],
                 outputs=[index_status]
             )
-            
+
+            # Data visualization handlers
+            refresh_stats_btn.click(
+                fn=self.get_database_statistics,
+                outputs=[stats_display, quick_stats]
+            )
+
+            refresh_collections_btn.click(
+                fn=self.get_collection_data,
+                inputs=[content_type_filter, limit_slider],
+                outputs=collections_table
+            )
+
         return app
     
     def handle_search(self, query: str, content_types: List[str]) -> Tuple:
@@ -205,6 +264,7 @@ class ResearchAssistantUI:
         status_updates = []
         results = {}
         collected_items = []
+        collection_ids = []  # Track collection IDs for marking as indexed
 
         try:
             if source_type == "ArXiv Papers":
@@ -218,6 +278,22 @@ class ResearchAssistantUI:
                 status_updates.append(f"✅ Collected {len(papers)} papers")
                 logger.info(f"Collected {len(papers)} papers")
 
+                # Track in database
+                for paper in papers:
+                    collection_id = self.db_manager.add_collection(
+                        content_type='paper',
+                        title=paper.get('title', 'Unknown'),
+                        source='arxiv',
+                        url=paper.get('pdf_url', ''),
+                        metadata={
+                            'query': query,
+                            'categories': paper.get('categories', [])
+                        }
+                    )
+                    self.db_manager.add_paper(collection_id, paper)
+                    collection_ids.append(collection_id)
+                self.db_manager.log_collection_stats('paper', query, len(papers), 'arxiv')
+
             elif source_type == "YouTube Lectures":
                 status_updates.append("Searching YouTube for lectures...")
                 logger.info("Collecting YouTube videos...")
@@ -228,6 +304,22 @@ class ResearchAssistantUI:
                 results['videos_collected'] = len(videos)
                 status_updates.append(f"✅ Collected {len(videos)} videos")
                 logger.info(f"Collected {len(videos)} videos")
+
+                # Track in database
+                for video in videos:
+                    collection_id = self.db_manager.add_collection(
+                        content_type='video',
+                        title=video.get('title', 'Unknown'),
+                        source='youtube',
+                        url=video.get('url', ''),
+                        metadata={
+                            'query': query,
+                            'description': video.get('description', '')
+                        }
+                    )
+                    self.db_manager.add_video(collection_id, video)
+                    collection_ids.append(collection_id)
+                self.db_manager.log_collection_stats('video', query, len(videos), 'youtube')
 
             elif source_type == "Podcasts":
                 status_updates.append("Collecting podcast episodes...")
@@ -247,6 +339,22 @@ class ResearchAssistantUI:
                 status_updates.append(f"✅ Collected {len(episodes)} episodes")
                 logger.info(f"Collected {len(episodes)} episodes")
 
+                # Track in database
+                for episode in episodes:
+                    collection_id = self.db_manager.add_collection(
+                        content_type='podcast',
+                        title=episode.get('title', 'Unknown'),
+                        source='podcast',
+                        url=episode.get('link', ''),
+                        metadata={
+                            'query': query,
+                            'description': episode.get('description', '')
+                        }
+                    )
+                    self.db_manager.add_podcast(collection_id, episode)
+                    collection_ids.append(collection_id)
+                self.db_manager.log_collection_stats('podcast', query, len(episodes), 'rss')
+
             # Index the collected data into OpenSearch
             if collected_items and self.opensearch_manager:
                 status_updates.append("\n📊 Indexing data into OpenSearch...")
@@ -257,6 +365,10 @@ class ResearchAssistantUI:
                 status_updates.append(f"✅ Indexed {indexed_count} items into OpenSearch")
                 results['items_indexed'] = indexed_count
                 logger.info(f"Successfully indexed {indexed_count} items")
+
+                # Mark all collection items as indexed in database
+                for cid in collection_ids:
+                    self.db_manager.mark_as_indexed(cid)
 
                 # Store for later use
                 self.collected_data.extend(collected_items)
@@ -408,5 +520,68 @@ class ResearchAssistantUI:
             'APA': 'apa',
             'JSON': 'json'
         }
-        
+
         return self.citation_tracker.export_bibliography(format_map[format])
+
+    def get_database_statistics(self) -> Tuple:
+        """Get database statistics for visualization"""
+        try:
+            stats = self.db_manager.get_statistics()
+
+            # Format quick stats markdown
+            by_type = stats.get('by_type', {})
+            total = sum(by_type.values())
+            indexed = stats.get('indexed', 0)
+            recent = stats.get('recent_7_days', 0)
+
+            quick_stats_md = f"""
+            ### Overview
+            - **Total Collections**: {total}
+            - **Indexed**: {indexed} ({indexed/total*100:.1f}% if total > 0 else 0%)
+            - **Recent (7 days)**: {recent}
+
+            ### By Type
+            - **Papers**: {by_type.get('paper', 0)}
+            - **Videos**: {by_type.get('video', 0)}
+            - **Podcasts**: {by_type.get('podcast', 0)}
+            """
+
+            return stats, quick_stats_md
+        except Exception as e:
+            logger.error(f"Error getting statistics: {e}")
+            return {}, f"Error loading statistics: {str(e)}"
+
+    def get_collection_data(self, content_type_filter: str, limit: int) -> List:
+        """Get collection data for table display"""
+        try:
+            # Map filter to database type
+            type_map = {
+                'All': None,
+                'Papers': 'paper',
+                'Videos': 'video',
+                'Podcasts': 'podcast'
+            }
+
+            db_type = type_map.get(content_type_filter)
+
+            if db_type:
+                collections = self.db_manager.get_collections_by_type(db_type, limit)
+            else:
+                collections = self.db_manager.get_all_collections(limit)
+
+            # Format for Gradio table
+            table_data = []
+            for item in collections:
+                table_data.append([
+                    item['id'],
+                    item['content_type'],
+                    item['title'][:100] + '...' if len(item['title']) > 100 else item['title'],
+                    item['source'] or 'N/A',
+                    'Yes' if item['indexed'] else 'No',
+                    item['collection_date'].split('T')[0] if 'T' in item['collection_date'] else item['collection_date']
+                ])
+
+            return table_data
+        except Exception as e:
+            logger.error(f"Error getting collection data: {e}")
+            return [["Error", "Error", f"Failed to load data: {str(e)}", "", "", ""]]

@@ -11,6 +11,7 @@ from multi_modal_rag.indexing.opensearch_manager import OpenSearchManager
 from multi_modal_rag.orchestration.research_orchestrator import ResearchOrchestrator
 from multi_modal_rag.orchestration.citation_tracker import CitationTracker
 from multi_modal_rag.ui.gradio_app import ResearchAssistantUI
+from multi_modal_rag.database import CollectionDatabaseManager
 
 def main():
     """Main application entry point"""
@@ -69,6 +70,11 @@ def main():
         citation_tracker = CitationTracker()
         logger.info("✅ Orchestrator and citation tracker created")
 
+        # Database manager
+        logger.info("Creating database manager...")
+        db_manager = CollectionDatabaseManager()
+        logger.info("✅ Database manager created")
+
         # Create UI
         logger.info("Creating Gradio UI...")
         data_collectors = {
@@ -81,7 +87,8 @@ def main():
             orchestrator,
             citation_tracker,
             data_collectors,
-            opensearch_manager=opensearch_manager  # Pass OpenSearch manager for indexing
+            opensearch_manager=opensearch_manager,  # Pass OpenSearch manager for indexing
+            db_manager=db_manager  # Pass database manager for tracking
         )
         app = ui.create_interface()
         logger.info("✅ Gradio UI created")
