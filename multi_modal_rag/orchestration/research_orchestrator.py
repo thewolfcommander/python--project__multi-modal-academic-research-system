@@ -1,7 +1,7 @@
 # multi_modal_rag/orchestration/research_orchestrator.py
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-from langchain_google_genai import GoogleGenerativeAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.memory import ConversationBufferMemory
 from langchain.schema import Document
 from typing import List, Dict
@@ -10,12 +10,14 @@ from multi_modal_rag.indexing.opensearch_manager import OpenSearchManager
 
 class ResearchOrchestrator:
     """Orchestrate complex research queries with LangChain"""
-    
+
     def __init__(self, gemini_api_key: str, opensearch_manager: OpenSearchManager):
-        self.llm = GoogleGenerativeAI(
-            model="gemini-1.5-pro",
+        # Using gemini-pro which is supported in v1beta API
+        self.llm = ChatGoogleGenerativeAI(
+            model="gemini-pro",
             google_api_key=gemini_api_key,
-            temperature=0.3
+            temperature=0.3,
+            convert_system_message_to_human=True
         )
         self.opensearch = opensearch_manager
         self.memory = ConversationBufferMemory(
@@ -67,14 +69,14 @@ class ResearchOrchestrator:
         
         # Step 3: Generate response
         prompt = self.create_research_chain()
-        
-        response = self.llm.invoke(
-            prompt.format(
-                context=context_with_citations,
-                chat_history=self.memory.chat_memory,
-                question=query
-            )
+
+        full_prompt = prompt.format(
+            context=context_with_citations,
+            chat_history=str(self.memory.chat_memory) if hasattr(self.memory, 'chat_memory') else "",
+            question=query
         )
+
+        response = self.llm.invoke(full_prompt).content
         
         # Step 4: Extract and track citations
         citations = self.extract_citations(response, search_results)
@@ -181,15 +183,21 @@ class ResearchOrchestrator:
         prompt = f"""
         Based on this research query: "{original_query}"
         And this response: "{response[:500]}..."
-        
+
         Generate 5 related research questions that would deepen understanding of this topic.
         Format as a JSON list.
         """
-        
-        related = self.llm.invoke(prompt)
-        
+
         try:
+            related_response = self.llm.invoke(prompt)
+            related = related_response.content if hasattr(related_response, 'content') else str(related_response)
+
             import json
             return json.loads(related)
         except:
-            return []
+            # Fallback: return simple related queries
+            return [
+                f"What are the key concepts in {original_query}?",
+                f"How does {original_query} relate to current research?",
+                f"What are recent developments in {original_query}?"
+            ]

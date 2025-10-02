@@ -12,7 +12,7 @@ class PDFProcessor:
     
     def __init__(self, gemini_api_key: str):
         genai.configure(api_key=gemini_api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-pro-vision')
+        self.model = genai.GenerativeModel('gemini-1.5-flash')
         
     def extract_text_and_images(self, pdf_path: str) -> Dict:
         """
@@ -72,38 +72,57 @@ class PDFProcessor:
             'extracted_equations': [],
             'citations': []
         }
-        
-        # Analyze text content
-        text_prompt = f"""
-        Analyze this academic paper and extract:
-        1. A comprehensive summary
-        2. Key concepts and definitions
-        3. Mathematical equations (if any)
-        4. References and citations
-        
-        Paper content:
-        {pdf_content['combined_text'][:10000]}  # Limit for token size
-        
-        Return in JSON format.
-        """
-        
-        text_response = self.model.generate_content(text_prompt)
-        
-        # Analyze images/diagrams
-        for img_data in pdf_content['images'][:5]:  # Process first 5 images
-            image_prompt = """
-            Describe this diagram/figure from an academic paper:
-            1. What type of diagram is it? (flowchart, graph, architecture, etc.)
-            2. What are the key components?
-            3. What concept does it illustrate?
-            4. Extract any text or labels from the image
+
+        try:
+            # Analyze text content
+            text_prompt = f"""
+            Analyze this academic paper and extract:
+            1. A comprehensive summary (2-3 sentences)
+            2. Key concepts and definitions (list 3-5 main concepts)
+            3. Any references mentioned
+
+            Paper content:
+            {pdf_content['combined_text'][:10000]}
+
+            Provide response in clear sections.
             """
-            
-            img_response = self.model.generate_content([image_prompt, img_data['image']])
-            
-            analysis['diagram_descriptions'].append({
-                'page': img_data['page'],
-                'description': img_response.text
-            })
-        
+
+            text_response = self.model.generate_content(text_prompt)
+            analysis['summary'] = text_response.text
+
+            # Extract key concepts from response (simple extraction)
+            if text_response.text:
+                # Simple extraction - split by common delimiters
+                lines = text_response.text.split('\n')
+                for line in lines:
+                    if any(keyword in line.lower() for keyword in ['concept:', 'key:', '-', '•']):
+                        concept = line.strip('- •*').strip()
+                        if concept and len(concept) < 100:
+                            analysis['key_concepts'].append(concept)
+
+            # Analyze images/diagrams
+            for img_data in pdf_content['images'][:5]:  # Process first 5 images
+                try:
+                    image_prompt = """
+                    Describe this diagram/figure from an academic paper:
+                    1. What type of diagram is it? (flowchart, graph, architecture, etc.)
+                    2. What are the key components?
+                    3. What concept does it illustrate?
+                    4. Extract any text or labels from the image
+                    """
+
+                    img_response = self.model.generate_content([image_prompt, img_data['image']])
+
+                    analysis['diagram_descriptions'].append({
+                        'page': img_data['page'],
+                        'description': img_response.text
+                    })
+                except Exception as e:
+                    print(f"Warning: Failed to analyze image on page {img_data['page']}: {e}")
+                    continue
+
+        except Exception as e:
+            print(f"Error analyzing PDF content: {e}")
+            analysis['summary'] = pdf_content['combined_text'][:500]  # Fallback to raw text
+
         return analysis

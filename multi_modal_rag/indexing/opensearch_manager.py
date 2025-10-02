@@ -7,7 +7,8 @@ from sentence_transformers import SentenceTransformer
 class OpenSearchManager:
     """Manage OpenSearch indexing and retrieval"""
     
-    def __init__(self, host: str = 'localhost', port: int = 9200):
+    def __init__(self, host: str = 'localhost', port: int = 9200,
+                 use_ssl: bool = True, username: str = 'admin', password: str = 'MyStrongPassword@2024!'):
         # For free tier, you can use OpenSearch locally via Docker
         self.host = host
         self.port = port
@@ -17,8 +18,9 @@ class OpenSearchManager:
         try:
             self.client = OpenSearch(
                 hosts=[{'host': host, 'port': port}],
+                http_auth=(username, password),
                 http_compress=True,
-                use_ssl=False,
+                use_ssl=use_ssl,
                 verify_certs=False,
                 ssl_assert_hostname=False,
                 ssl_show_warn=False,
@@ -48,8 +50,7 @@ class OpenSearchManager:
                 'index': {
                     'number_of_shards': 2,
                     'number_of_replicas': 1,
-                    'knn': True,
-                    'knn.space_type': 'cosinesimil'
+                    'knn': True
                 }
             },
             'mappings': {
@@ -145,34 +146,15 @@ class OpenSearchManager:
             print(f"⚠️  Cannot search - OpenSearch not connected")
             return []
 
-        # Generate query embedding
-        query_embedding = self.embedding_model.encode(query).tolist()
-        
-        # Hybrid query combining text and vector search
+        # Simplified text-based search (vector search disabled for OpenSearch 3.x compatibility)
         search_query = {
             'size': k,
             'query': {
-                'bool': {
-                    'should': [
-                        {
-                            'multi_match': {
-                                'query': query,
-                                'fields': ['title^2', 'abstract', 'content', 'transcript'],
-                                'type': 'best_fields'
-                            }
-                        },
-                        {
-                            'script_score': {
-                                'query': {'match_all': {}},
-                                'script': {
-                                    'source': "cosineSimilarity(params.query_vector, 'embedding') + 1.0",
-                                    'params': {
-                                        'query_vector': query_embedding
-                                    }
-                                }
-                            }
-                        }
-                    ]
+                'multi_match': {
+                    'query': query,
+                    'fields': ['title^3', 'abstract^2', 'content', 'transcript', 'key_concepts^2'],
+                    'type': 'best_fields',
+                    'fuzziness': 'AUTO'
                 }
             }
         }
