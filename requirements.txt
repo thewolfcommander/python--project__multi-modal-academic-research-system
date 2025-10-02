@@ -21,3 +21,4 @@ tqdm==4.66.1
 requests==2.31.0
 beautifulsoup4==4.12.2
 whisper==1.1.10
+yt-dlp==2024.3.10  # Alternative to pytube for YouTube data extraction

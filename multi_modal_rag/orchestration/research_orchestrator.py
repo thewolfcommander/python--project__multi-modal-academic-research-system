@@ -7,23 +7,32 @@ from langchain.schema import Document
 from typing import List, Dict
 
 from multi_modal_rag.indexing.opensearch_manager import OpenSearchManager
+from multi_modal_rag.logging_config import get_logger
+
+logger = get_logger(__name__)
 
 class ResearchOrchestrator:
     """Orchestrate complex research queries with LangChain"""
 
     def __init__(self, gemini_api_key: str, opensearch_manager: OpenSearchManager):
-        # Using gemini-pro which is supported in v1beta API
-        self.llm = ChatGoogleGenerativeAI(
-            model="gemini-pro",
-            google_api_key=gemini_api_key,
-            temperature=0.3,
-            convert_system_message_to_human=True
-        )
-        self.opensearch = opensearch_manager
-        self.memory = ConversationBufferMemory(
-            memory_key="chat_history",
-            return_messages=True
-        )
+        logger.info("Initializing ResearchOrchestrator...")
+        try:
+            logger.debug("Creating ChatGoogleGenerativeAI with model: gemini-pro")
+            self.llm = ChatGoogleGenerativeAI(
+                model="gemini-pro",
+                google_api_key=gemini_api_key,
+                temperature=0.3,
+                convert_system_message_to_human=True
+            )
+            self.opensearch = opensearch_manager
+            self.memory = ConversationBufferMemory(
+                memory_key="chat_history",
+                return_messages=True
+            )
+            logger.info("✅ ResearchOrchestrator initialized successfully")
+        except Exception as e:
+            logger.error(f"Error initializing ResearchOrchestrator: {type(e).__name__}: {e}", exc_info=True)
+            raise
         
     def create_research_chain(self):
         """
@@ -61,35 +70,60 @@ class ResearchOrchestrator:
         """
         Process a research query with full pipeline
         """
-        # Step 1: Retrieve relevant documents
-        search_results = self.opensearch.hybrid_search(index_name, query, k=10)
-        
-        # Step 2: Format context with citations
-        context_with_citations = self.format_context_with_citations(search_results)
-        
-        # Step 3: Generate response
-        prompt = self.create_research_chain()
+        logger.info(f"Processing research query: '{query}' on index '{index_name}'")
+        try:
+            # Step 1: Retrieve relevant documents
+            logger.debug("Step 1: Retrieving relevant documents from OpenSearch")
+            search_results = self.opensearch.hybrid_search(index_name, query, k=10)
+            logger.info(f"Retrieved {len(search_results)} search results")
 
-        full_prompt = prompt.format(
-            context=context_with_citations,
-            chat_history=str(self.memory.chat_memory) if hasattr(self.memory, 'chat_memory') else "",
-            question=query
-        )
+            # Step 2: Format context with citations
+            logger.debug("Step 2: Formatting context with citations")
+            context_with_citations = self.format_context_with_citations(search_results)
 
-        response = self.llm.invoke(full_prompt).content
-        
-        # Step 4: Extract and track citations
-        citations = self.extract_citations(response, search_results)
-        
-        # Step 5: Update memory
-        self.memory.save_context({"input": query}, {"output": response})
-        
-        return {
-            'answer': response,
-            'citations': citations,
-            'source_documents': search_results,
-            'related_queries': self.generate_related_queries(query, response)
-        }
+            # Step 3: Generate response
+            logger.debug("Step 3: Generating LLM response")
+            prompt = self.create_research_chain()
+
+            full_prompt = prompt.format(
+                context=context_with_citations,
+                chat_history=str(self.memory.chat_memory) if hasattr(self.memory, 'chat_memory') else "",
+                question=query
+            )
+
+            logger.debug("Invoking LLM...")
+            response = self.llm.invoke(full_prompt).content
+            logger.info(f"Generated response ({len(response)} chars)")
+
+            # Step 4: Extract and track citations
+            logger.debug("Step 4: Extracting citations from response")
+            citations = self.extract_citations(response, search_results)
+            logger.info(f"Extracted {len(citations)} citations")
+
+            # Step 5: Update memory
+            logger.debug("Step 5: Updating conversation memory")
+            self.memory.save_context({"input": query}, {"output": response})
+
+            # Step 6: Generate related queries
+            logger.debug("Step 6: Generating related queries")
+            related_queries = self.generate_related_queries(query, response)
+
+            logger.info("✅ Successfully processed research query")
+            return {
+                'answer': response,
+                'citations': citations,
+                'source_documents': search_results,
+                'related_queries': related_queries
+            }
+
+        except Exception as e:
+            logger.error(f"Error processing query '{query}': {type(e).__name__}: {e}", exc_info=True)
+            return {
+                'answer': f"Error processing query: {str(e)}",
+                'citations': [],
+                'source_documents': [],
+                'related_queries': []
+            }
     
     def format_context_with_citations(self, search_results: List[Dict]) -> str:
         """

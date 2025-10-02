@@ -12,7 +12,9 @@ class PDFProcessor:
     
     def __init__(self, gemini_api_key: str):
         genai.configure(api_key=gemini_api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        # Use gemini-pro for text, gemini-pro-vision for images
+        self.text_model = genai.GenerativeModel('gemini-pro')
+        self.vision_model = genai.GenerativeModel('gemini-pro-vision')
         
     def extract_text_and_images(self, pdf_path: str) -> Dict:
         """
@@ -87,7 +89,7 @@ class PDFProcessor:
             Provide response in clear sections.
             """
 
-            text_response = self.model.generate_content(text_prompt)
+            text_response = self.text_model.generate_content(text_prompt)
             analysis['summary'] = text_response.text
 
             # Extract key concepts from response (simple extraction)
@@ -111,7 +113,7 @@ class PDFProcessor:
                     4. Extract any text or labels from the image
                     """
 
-                    img_response = self.model.generate_content([image_prompt, img_data['image']])
+                    img_response = self.vision_model.generate_content([image_prompt, img_data['image']])
 
                     analysis['diagram_descriptions'].append({
                         'page': img_data['page'],

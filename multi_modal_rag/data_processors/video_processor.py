@@ -8,7 +8,7 @@ class VideoProcessor:
     
     def __init__(self, gemini_api_key: str):
         genai.configure(api_key=gemini_api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        self.model = genai.GenerativeModel('gemini-pro')
         
     def extract_key_frames(self, video_url: str, num_frames: int = 10) -> List[Image.Image]:
         """
