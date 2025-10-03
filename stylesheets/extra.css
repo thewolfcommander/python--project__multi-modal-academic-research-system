@@ -1,0 +1,279 @@
+/* Custom CSS for Multi-Modal Academic Research System Documentation */
+
+/* Color scheme enhancements */
+:root {
+  --md-primary-fg-color: #3f51b5;
+  --md-primary-fg-color--light: #5c6bc0;
+  --md-primary-fg-color--dark: #303f9f;
+  --md-accent-fg-color: #ff4081;
+}
+
+/* Custom card styling */
+.md-typeset .grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.md-typeset .grid.cards > * {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  padding: 1rem;
+  transition: border 0.25s, box-shadow 0.25s;
+}
+
+.md-typeset .grid.cards > *:hover {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05);
+}
+
+/* Code block enhancements */
+.md-typeset pre > code {
+  border-radius: 0.2rem;
+}
+
+.md-typeset .highlight pre {
+  margin: 0;
+}
+
+/* Admonition custom colors */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: #00c853;
+}
+
+.md-typeset .tip > .admonition-title,
+.md-typeset .tip > summary {
+  background-color: rgba(0, 200, 83, 0.1);
+}
+
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: #2196f3;
+}
+
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+/* Table styling */
+.md-typeset table:not([class]) {
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-code-bg-color);
+  font-weight: 700;
+}
+
+/* Badge styling */
+.md-typeset img[alt*="shield.io"] {
+  display: inline-block;
+  margin: 0.2rem;
+}
+
+/* Mermaid diagram styling */
+.mermaid {
+  text-align: center;
+}
+
+/* Navigation breadcrumbs */
+.md-header__title {
+  font-weight: 600;
+}
+
+/* Footer customization */
+.md-footer {
+  background-color: var(--md-footer-bg-color);
+}
+
+.md-footer-meta {
+  background-color: var(--md-footer-bg-color--dark);
+}
+
+/* Custom button styles */
+.md-button {
+  border-radius: 0.2rem;
+  font-weight: 600;
+  padding: 0.625rem 1rem;
+}
+
+.md-button--primary {
+  background-color: var(--md-primary-fg-color);
+  border-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+.md-button--primary:hover {
+  background-color: var(--md-primary-fg-color--dark);
+  border-color: var(--md-primary-fg-color--dark);
+}
+
+/* Code annotation styling */
+.md-annotation__index {
+  font-weight: 700;
+}
+
+/* Search result highlighting */
+.md-search-result__article {
+  padding: 0.5rem 1rem;
+}
+
+.md-search-result mark {
+  background-color: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+  font-weight: 600;
+}
+
+/* Content width optimization */
+.md-content {
+  max-width: 100%;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-content {
+    max-width: calc(100% - 24rem);
+  }
+}
+
+/* Custom emoji sizing */
+.md-typeset .lg {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.md-typeset .middle {
+  vertical-align: middle;
+}
+
+/* Tab styling */
+.md-typeset .tabbed-set {
+  border-radius: 0.2rem;
+}
+
+.md-typeset .tabbed-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Stats cards */
+.grid.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.grid.stats > div {
+  background-color: var(--md-code-bg-color);
+  border-radius: 0.2rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.grid.stats > div h2 {
+  color: var(--md-accent-fg-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.grid.stats > div p {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0;
+  text-transform: uppercase;
+}
+
+/* Print styles */
+@media print {
+  .md-header,
+  .md-footer,
+  .md-sidebar,
+  .md-nav__link--active,
+  .md-search,
+  .md-source {
+    display: none;
+  }
+
+  .md-content {
+    max-width: 100%;
+  }
+}
+
+/* Dark mode specific adjustments */
+[data-md-color-scheme="slate"] {
+  --md-code-bg-color: #2e3440;
+  --md-code-fg-color: #d8dee9;
+}
+
+[data-md-color-scheme="slate"] .grid.cards > * {
+  background-color: var(--md-code-bg-color);
+}
+
+/* Accessibility improvements */
+.md-typeset a:focus,
+.md-typeset button:focus {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Version banner */
+.md-banner {
+  background-color: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+  padding: 0.5rem;
+  text-align: center;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 0.4rem;
+  height: 0.4rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--md-default-fg-color--lighter);
+}
+
+/* Responsive tables */
+.md-typeset table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Image captions */
+.md-typeset figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.md-typeset figcaption {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+}

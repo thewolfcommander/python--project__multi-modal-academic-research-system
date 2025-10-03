@@ -1,0 +1,2268 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Comprehensive documentation for the Multi-Modal Academic Research System - A Python application for collecting, processing, and querying academic content using RAG with OpenSearch and Google Gemini.">
+      
+      
+        <meta name="author" content="Development Team">
+      
+      
+        <link rel="canonical" href="https://yourdomain.com/docs/setup/quick-start/">
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../configuration/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Quick Start - Multi-Modal Academic Research System</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-XXXXXXXXXX"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-XXXXXXXXXX",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quick-start-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Multi-Modal Academic Research System" class="md-header__button md-logo" aria-label="Multi-Modal Academic Research System" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Multi-Modal Academic Research System
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quick Start
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yourusername/multi-modal-academic-research-system" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    multi-modal-research
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../README.md" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../modules/data-collectors/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Core Modules
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deployment/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deployment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../database/schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/rest-api/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../troubleshooting/common-issues/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Troubleshooting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../advanced/embedding-models/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Advanced Topics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../DOCUMENTATION_INDEX/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Multi-Modal Academic Research System" class="md-nav__button md-logo" aria-label="Multi-Modal Academic Research System" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Multi-Modal Academic Research System
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yourusername/multi-modal-academic-research-system" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    multi-modal-research
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-minute-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      5-Minute Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5-Minute Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-start-opensearch-1-minute" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Start OpenSearch (1 minute)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-set-up-python-environment-2-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Set Up Python Environment (2 minutes)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-configure-api-key-1-minute" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Configure API Key (1 minute)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-launch-the-application-1-minute" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Launch the Application (1 minute)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Your First Query
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Your First Query">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-the-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test the System
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collecting-your-first-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collecting Your First Papers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collecting Your First Papers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-navigate-to-data-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Navigate to Data Collection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-collect-papers-from-arxiv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Collect Papers from ArXiv
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-monitor-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Monitor Progress
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-run-your-first-real-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Run Your First Real Query
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the Interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding the Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-research-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Research Tab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data-collection-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Data Collection Tab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-citation-manager-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Citation Manager Tab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-settings-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Settings Tab
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-tips-for-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Tips for Success
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Tips for Success">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-collection-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Collection Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-query-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Query Techniques
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-content-diversity" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Content Diversity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-regular-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Regular Maintenance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-quick-start-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Quick Start Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Quick Start Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-cannot-connect-to-opensearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue: "Cannot connect to OpenSearch"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-gemini_api_key-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue: "GEMINI_API_KEY not found"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-papers-collecting-but-not-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue: Papers collecting but not processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-slow-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue: Slow performance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Workflows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow-1-research-a-new-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow 1: Research a New Topic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-2-literature-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow 2: Literature Review
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-3-learning-a-new-concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow 3: Learning a New Concept
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Next Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#learn-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learn More
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expand-your-knowledge-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expand Your Knowledge Base
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimize-your-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimize Your Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../architecture/overview/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../modules/data-collectors/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Core Modules
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../tutorials/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../deployment/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../database/schema/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Database
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../api/rest-api/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../troubleshooting/common-issues/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../advanced/embedding-models/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Advanced Topics
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../DOCUMENTATION_INDEX/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/yourusername/multi-modal-academic-research-system/edit/main/docs/setup/quick-start.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/yourusername/multi-modal-academic-research-system/raw/main/docs/setup/quick-start.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="quick-start-guide">Quick Start Guide<a class="headerlink" href="#quick-start-guide" title="Permanent link">&para;</a></h1>
+<p>Get up and running with the Multi-Modal Academic Research System in 5 minutes.</p>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#prerequisites-checklist">Prerequisites Checklist</a></li>
+<li><a href="#5-minute-setup">5-Minute Setup</a></li>
+<li><a href="#your-first-query">Your First Query</a></li>
+<li><a href="#collecting-your-first-papers">Collecting Your First Papers</a></li>
+<li><a href="#understanding-the-interface">Understanding the Interface</a></li>
+<li><a href="#next-steps">Next Steps</a></li>
+</ul>
+<hr />
+<h2 id="prerequisites-checklist">Prerequisites Checklist<a class="headerlink" href="#prerequisites-checklist" title="Permanent link">&para;</a></h2>
+<p>Before you begin, ensure you have completed:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Python 3.9+ installed (<code>python --version</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Docker installed and running (<code>docker --version</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Google Gemini API key (free from https://makersuite.google.com/app/apikey)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Project downloaded/cloned to your local machine</li>
+</ul>
+<p><strong>Not ready?</strong> See the full <a href="../installation/">Installation Guide</a> for detailed setup instructions.</p>
+<hr />
+<h2 id="5-minute-setup">5-Minute Setup<a class="headerlink" href="#5-minute-setup" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-start-opensearch-1-minute">Step 1: Start OpenSearch (1 minute)<a class="headerlink" href="#step-1-start-opensearch-1-minute" title="Permanent link">&para;</a></h3>
+<p>Open a terminal and run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--name<span class="w"> </span>opensearch-research<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">9200</span>:9200<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>-e<span class="w"> </span><span class="s2">&quot;discovery.type=single-node&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>-e<span class="w"> </span><span class="s2">&quot;OPENSEARCH_INITIAL_ADMIN_PASSWORD=MyStrongPassword@2024!&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>opensearchproject/opensearch:latest
+</span></code></pre></div>
+<p>Wait 30 seconds for OpenSearch to initialize.</p>
+<h3 id="step-2-set-up-python-environment-2-minutes">Step 2: Set Up Python Environment (2 minutes)<a class="headerlink" href="#step-2-set-up-python-environment-2-minutes" title="Permanent link">&para;</a></h3>
+<p>Navigate to the project directory and run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Create and activate virtual environment</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: venv\Scripts\activate</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Install dependencies</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<h3 id="step-3-configure-api-key-1-minute">Step 3: Configure API Key (1 minute)<a class="headerlink" href="#step-3-configure-api-key-1-minute" title="Permanent link">&para;</a></h3>
+<p>Create your <code>.env</code> file:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+</span></code></pre></div>
+<p>Edit <code>.env</code> and add your Gemini API key:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>GEMINI_API_KEY=your_actual_api_key_here
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>OPENSEARCH_HOST=localhost
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>OPENSEARCH_PORT=9200
+</span></code></pre></div>
+<h3 id="step-4-launch-the-application-1-minute">Step 4: Launch the Application (1 minute)<a class="headerlink" href="#step-4-launch-the-application-1-minute" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>main.py
+</span></code></pre></div>
+<p>You should see:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>🚀 Initializing Multi-Modal Research Assistant...
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>✅ Connected to OpenSearch at localhost:9200
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>✅ Research Assistant ready!
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>🌐 Opening web interface...
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>Running on local URL:  http://0.0.0.0:7860
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Running on public URL: https://xxxxx.gradio.live
+</span></code></pre></div>
+<p><strong>Success!</strong> Open http://localhost:7860 in your browser.</p>
+<hr />
+<h2 id="your-first-query">Your First Query<a class="headerlink" href="#your-first-query" title="Permanent link">&para;</a></h2>
+<p>The system comes with no data initially. Let's test it with a simple query to understand the interface, then collect some papers.</p>
+<h3 id="test-the-system">Test the System<a class="headerlink" href="#test-the-system" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Navigate to the <strong>Research</strong> tab (should be open by default)</li>
+<li>In the query box, type: "What is machine learning?"</li>
+<li>Click <strong>Ask Question</strong></li>
+</ol>
+<p><strong>Expected Result</strong>: You'll see a message indicating no documents are available yet. This is normal - you need to collect data first!</p>
+<hr />
+<h2 id="collecting-your-first-papers">Collecting Your First Papers<a class="headerlink" href="#collecting-your-first-papers" title="Permanent link">&para;</a></h2>
+<p>Let's populate the system with academic papers about a topic.</p>
+<h3 id="step-1-navigate-to-data-collection">Step 1: Navigate to Data Collection<a class="headerlink" href="#step-1-navigate-to-data-collection" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Click the <strong>Data Collection</strong> tab at the top of the interface</li>
+</ol>
+<h3 id="step-2-collect-papers-from-arxiv">Step 2: Collect Papers from ArXiv<a class="headerlink" href="#step-2-collect-papers-from-arxiv" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Find the <strong>Collect Papers</strong> section</li>
+<li>Enter a topic you're interested in, for example:</li>
+<li>"machine learning"</li>
+<li>"natural language processing"</li>
+<li>"computer vision"</li>
+<li>
+<p>"quantum computing"</p>
+</li>
+<li>
+<p>Set <strong>Number of papers</strong> to: <code>5</code> (for a quick start)</p>
+</li>
+<li>
+<p>Click <strong>Collect Papers</strong></p>
+</li>
+</ol>
+<p><strong>What happens</strong>: The system will:
+- Search ArXiv for the latest papers on your topic
+- Download the PDFs
+- Extract text and diagrams
+- Analyze diagrams using Gemini Vision
+- Generate embeddings
+- Index everything in OpenSearch</p>
+<p><strong>Time</strong>: Expect 2-5 minutes for 5 papers.</p>
+<h3 id="step-3-monitor-progress">Step 3: Monitor Progress<a class="headerlink" href="#step-3-monitor-progress" title="Permanent link">&para;</a></h3>
+<p>You'll see status updates like:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>✅ Collected 5 papers on &#39;machine learning&#39;
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Processing paper 1/5: &quot;Deep Learning for Computer Vision&quot;...
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>✅ Indexed paper: Deep Learning for Computer Vision
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Processing paper 2/5: &quot;Attention Is All You Need&quot;...
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>...
+</span></code></pre></div></p>
+<h3 id="step-4-run-your-first-real-query">Step 4: Run Your First Real Query<a class="headerlink" href="#step-4-run-your-first-real-query" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go back to the <strong>Research</strong> tab</li>
+<li>Enter a query related to your collected papers:</li>
+<li>"What are the key concepts in machine learning?"</li>
+<li>"Explain neural networks"</li>
+<li>
+<p>"How do transformers work?"</p>
+</li>
+<li>
+<p>Click <strong>Ask Question</strong></p>
+</li>
+</ol>
+<p><strong>Expected Result</strong>: You'll receive:
+- A comprehensive answer synthesized from the papers
+- Citations in brackets [1], [2], etc.
+- Source information showing which papers were used</p>
+<p>Example response:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Machine learning is a subset of artificial intelligence that enables
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>systems to learn and improve from experience [1]. Key concepts include:
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>1. Neural Networks: Computational models inspired by biological neurons [1][2]
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>2. Training: The process of adjusting model parameters using data [2]
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>3. Deep Learning: Multi-layer neural networks for complex patterns [3]
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>Sources:
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>[1] &quot;Deep Learning Fundamentals&quot; (Smith et al., 2023)
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>[2] &quot;Introduction to Neural Networks&quot; (Johnson, 2023)
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>[3] &quot;Modern Machine Learning&quot; (Lee et al., 2024)
+</span></code></pre></div></p>
+<hr />
+<h2 id="understanding-the-interface">Understanding the Interface<a class="headerlink" href="#understanding-the-interface" title="Permanent link">&para;</a></h2>
+<p>The Research Assistant has four main tabs:</p>
+<h3 id="1-research-tab">1. Research Tab<a class="headerlink" href="#1-research-tab" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Query your knowledge base and get AI-powered answers with citations</p>
+<p><strong>Key Features</strong>:
+- Query input box
+- AI-generated responses with citations
+- Conversation history
+- Source attribution</p>
+<p><strong>Usage Tips</strong>:
+- Ask specific questions for better results
+- Use follow-up questions to dive deeper
+- Check citations to verify information</p>
+<h3 id="2-data-collection-tab">2. Data Collection Tab<a class="headerlink" href="#2-data-collection-tab" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Gather academic content from multiple sources</p>
+<p><strong>Sources Available</strong>:
+- <strong>Academic Papers</strong>: ArXiv, PubMed Central, Semantic Scholar
+- <strong>YouTube Videos</strong>: Educational channels and lectures
+- <strong>Podcasts</strong>: Academic and educational podcast episodes</p>
+<p><strong>Parameters</strong>:
+- Topic/search query
+- Number of items to collect
+- Source preference</p>
+<p><strong>Usage Tips</strong>:
+- Start with 5-10 papers to avoid long wait times
+- Choose topics that match your research interests
+- Mix different sources (papers, videos, podcasts) for diverse perspectives</p>
+<h3 id="3-citation-manager-tab">3. Citation Manager Tab<a class="headerlink" href="#3-citation-manager-tab" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: View and export citations from your research sessions</p>
+<p><strong>Features</strong>:
+- List of all cited sources
+- Export to BibTeX format
+- Citation details (authors, title, date, URL)</p>
+<p><strong>Usage Tips</strong>:
+- Export citations after each research session
+- Use BibTeX exports in your LaTeX documents
+- Keep track of sources for academic writing</p>
+<h3 id="4-settings-tab">4. Settings Tab<a class="headerlink" href="#4-settings-tab" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Configure system settings and connections</p>
+<p><strong>Settings</strong>:
+- OpenSearch connection (host, port)
+- API keys (Gemini)
+- Index management
+- System health status</p>
+<p><strong>Usage Tips</strong>:
+- Check connection status if searches fail
+- Verify OpenSearch is running
+- Update API keys if needed</p>
+<hr />
+<h2 id="quick-tips-for-success">Quick Tips for Success<a class="headerlink" href="#quick-tips-for-success" title="Permanent link">&para;</a></h2>
+<h3 id="1-collection-strategy">1. Collection Strategy<a class="headerlink" href="#1-collection-strategy" title="Permanent link">&para;</a></h3>
+<p><strong>Start Small</strong>: Collect 5-10 papers initially to test the system
+- Faster processing
+- Easier to verify quality
+- Quick feedback on topics</p>
+<p><strong>Scale Up</strong>: Once comfortable, collect 20-50 papers per topic
+- Better coverage
+- More comprehensive answers
+- Diverse perspectives</p>
+<h3 id="2-query-techniques">2. Query Techniques<a class="headerlink" href="#2-query-techniques" title="Permanent link">&para;</a></h3>
+<p><strong>Be Specific</strong>:
+- Good: "What is the attention mechanism in transformers?"
+- Less effective: "Tell me about AI"</p>
+<p><strong>Ask Follow-ups</strong>:
+- "Can you explain that in simpler terms?"
+- "What are the practical applications?"
+- "How does this compare to other approaches?"</p>
+<p><strong>Request Evidence</strong>:
+- "What evidence supports this claim?"
+- "Which papers discuss this topic?"</p>
+<h3 id="3-content-diversity">3. Content Diversity<a class="headerlink" href="#3-content-diversity" title="Permanent link">&para;</a></h3>
+<p>Mix different content types for richer research:
+- <strong>Papers</strong>: Detailed technical information, formulas, experiments
+- <strong>Videos</strong>: Visual explanations, demonstrations, lectures
+- <strong>Podcasts</strong>: Discussions, interviews, high-level overviews</p>
+<h3 id="4-regular-maintenance">4. Regular Maintenance<a class="headerlink" href="#4-regular-maintenance" title="Permanent link">&para;</a></h3>
+<p><strong>Update Your Knowledge Base</strong>:
+- Collect new papers weekly on your topics
+- Keep content current with latest research</p>
+<p><strong>Monitor Storage</strong>:
+- PDFs and processed data accumulate in <code>data/</code> folder
+- Clean up old content periodically</p>
+<p><strong>Check Logs</strong>:
+- Review <code>logs/</code> directory for any errors
+- Helps troubleshoot issues early</p>
+<hr />
+<h2 id="common-quick-start-issues">Common Quick Start Issues<a class="headerlink" href="#common-quick-start-issues" title="Permanent link">&para;</a></h2>
+<h3 id="issue-cannot-connect-to-opensearch">Issue: "Cannot connect to OpenSearch"<a class="headerlink" href="#issue-cannot-connect-to-opensearch" title="Permanent link">&para;</a></h3>
+<p><strong>Quick Fix</strong>:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Check if OpenSearch is running</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>opensearch
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># If not running, start it</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>docker<span class="w"> </span>start<span class="w"> </span>opensearch-research
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># If container doesn&#39;t exist, create it (see Step 1)</span>
+</span></code></pre></div></p>
+<h3 id="issue-gemini_api_key-not-found">Issue: "GEMINI_API_KEY not found"<a class="headerlink" href="#issue-gemini_api_key-not-found" title="Permanent link">&para;</a></h3>
+<p><strong>Quick Fix</strong>:
+1. Verify <code>.env</code> file exists: <code>ls -la .env</code>
+2. Check content: <code>cat .env</code>
+3. Ensure key has no quotes: <code>GEMINI_API_KEY=AIza...</code> not <code>GEMINI_API_KEY="AIza..."</code>
+4. Restart application: <code>python main.py</code></p>
+<h3 id="issue-papers-collecting-but-not-processing">Issue: Papers collecting but not processing<a class="headerlink" href="#issue-papers-collecting-but-not-processing" title="Permanent link">&para;</a></h3>
+<p><strong>Quick Fix</strong>:
+- Check logs in <code>logs/</code> directory for errors
+- Verify Gemini API key is valid
+- Try with fewer papers (1-2) to isolate issues
+- Check internet connection</p>
+<h3 id="issue-slow-performance">Issue: Slow performance<a class="headerlink" href="#issue-slow-performance" title="Permanent link">&para;</a></h3>
+<p><strong>Quick Fix</strong>:
+- Start with fewer papers (5 instead of 20)
+- Close other applications to free memory
+- Wait for first-time model downloads to complete
+- Check Docker has enough memory allocated (4GB+ recommended)</p>
+<hr />
+<h2 id="example-workflows">Example Workflows<a class="headerlink" href="#example-workflows" title="Permanent link">&para;</a></h2>
+<h3 id="workflow-1-research-a-new-topic">Workflow 1: Research a New Topic<a class="headerlink" href="#workflow-1-research-a-new-topic" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Collect</strong>: Data Collection → Enter "quantum computing" → Collect 10 papers</li>
+<li><strong>Explore</strong>: Research → "What is quantum computing?"</li>
+<li><strong>Deep Dive</strong>: Research → "How do quantum gates work?"</li>
+<li><strong>Compare</strong>: Research → "What are the differences between quantum and classical computing?"</li>
+<li><strong>Export</strong>: Citation Manager → Export BibTeX</li>
+</ol>
+<h3 id="workflow-2-literature-review">Workflow 2: Literature Review<a class="headerlink" href="#workflow-2-literature-review" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Broad Collection</strong>: Collect 30 papers on your research area</li>
+<li><strong>Overview</strong>: "What are the main research directions in [topic]?"</li>
+<li><strong>Specific Topics</strong>: "What methods are used for [specific problem]?"</li>
+<li><strong>Gaps</strong>: "What are open challenges in [topic]?"</li>
+<li><strong>Timeline</strong>: "How has [topic] evolved over time?"</li>
+</ol>
+<h3 id="workflow-3-learning-a-new-concept">Workflow 3: Learning a New Concept<a class="headerlink" href="#workflow-3-learning-a-new-concept" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Mixed Media</strong>: Collect papers + YouTube videos on the topic</li>
+<li><strong>Introduction</strong>: "Explain [concept] in simple terms"</li>
+<li><strong>Technical</strong>: "What is the mathematical foundation of [concept]?"</li>
+<li><strong>Visual</strong>: Videos provide diagrams and animations</li>
+<li><strong>Practice</strong>: "What are example applications of [concept]?"</li>
+</ol>
+<hr />
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>Now that you're up and running:</p>
+<h3 id="learn-more">Learn More<a class="headerlink" href="#learn-more" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Configuration Guide</strong>: Customize settings, logging, and advanced options</li>
+<li>
+<p>See <a href="../configuration/">Configuration Guide</a></p>
+</li>
+<li>
+<p><strong>Architecture</strong>: Understand how the system works under the hood</p>
+</li>
+<li>
+<p>See <a href="../../architecture/technology-stack/">Technology Stack</a></p>
+</li>
+<li>
+<p><strong>Full Documentation</strong>: Explore all features and capabilities</p>
+</li>
+<li>See <a href="../../CLAUDE.md">Main README</a></li>
+</ol>
+<h3 id="expand-your-knowledge-base">Expand Your Knowledge Base<a class="headerlink" href="#expand-your-knowledge-base" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Collect papers from multiple sources (ArXiv, PubMed, Semantic Scholar)</li>
+<li>Add YouTube lectures from educational channels</li>
+<li>Include podcast episodes for diverse perspectives</li>
+</ul>
+<h3 id="optimize-your-workflow">Optimize Your Workflow<a class="headerlink" href="#optimize-your-workflow" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Create topic-specific collections</li>
+<li>Use citation exports for your papers</li>
+<li>Experiment with different query styles</li>
+<li>Build a comprehensive research database</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>Still having issues?</strong></p>
+<ol>
+<li><strong>Check Logs</strong>: <code>logs/research_system_*.log</code> contains detailed error information</li>
+<li><strong>Verify Setup</strong>: Run through the <a href="../installation/">Installation Guide</a> checklist</li>
+<li><strong>Review Configuration</strong>: See <a href="../configuration/">Configuration Guide</a></li>
+<li><strong>Common Issues</strong>: Full list in <a href="../installation/#common-installation-issues">Installation Guide - Common Issues</a></li>
+</ol>
+<hr />
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Documentation</strong>: Start with CLAUDE.md in the project root</li>
+<li><strong>Logs</strong>: Check <code>logs/</code> directory for error details</li>
+<li><strong>Issues</strong>: Report bugs or request features on GitHub</li>
+</ul>
+<hr />
+<p><strong>Congratulations! You're now ready to conduct AI-powered academic research with multi-modal sources.</strong></p>
+<p>Happy researching!</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Installation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../configuration/" class="md-footer__link md-footer__link--next" aria-label="Next: Configuration">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Configuration
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Multi-Modal Research Team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/yourusername/multi-modal-academic-research-system" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://pypi.org/project/multi-modal-research/" target="_blank" rel="noopener" title="pypi.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6M286.2 444.7a20.4 20.4 0 1 1 0-40.7 20.4 20.4 0 1 1 0 40.7M167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4m-6.6-183.4a20.4 20.4 0 1 1 0 40.8 20.4 20.4 0 1 1 0-40.8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

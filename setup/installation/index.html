@@ -1,0 +1,2246 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Comprehensive documentation for the Multi-Modal Academic Research System - A Python application for collecting, processing, and querying academic content using RAG with OpenSearch and Google Gemini.">
+      
+      
+        <meta name="author" content="Development Team">
+      
+      
+        <link rel="canonical" href="https://yourdomain.com/docs/setup/installation/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../quick-start/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Installation - Multi-Modal Academic Research System</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-XXXXXXXXXX"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-XXXXXXXXXX",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installation-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Multi-Modal Academic Research System" class="md-header__button md-logo" aria-label="Multi-Modal Academic Research System" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Multi-Modal Academic Research System
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Installation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yourusername/multi-modal-academic-research-system" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    multi-modal-research
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../README.md" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../modules/data-collectors/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Core Modules
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deployment/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deployment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../database/schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/rest-api/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../troubleshooting/common-issues/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Troubleshooting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../advanced/embedding-models/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Advanced Topics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../DOCUMENTATION_INDEX/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Multi-Modal Academic Research System" class="md-nav__button md-logo" aria-label="Multi-Modal Academic Research System" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Multi-Modal Academic Research System
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yourusername/multi-modal-academic-research-system" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    multi-modal-research
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimum-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimum Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommended Specifications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation Steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-clone-or-download-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Clone or Download the Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-create-a-virtual-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Create a Virtual Environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-activate-the-virtual-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Activate the Virtual Environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-upgrade-pip-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Upgrade pip (Recommended)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-install-python-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5: Install Python Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-configure-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6: Configure Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-start-opensearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 7: Start OpenSearch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-8-initialize-data-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 8: Initialize Data Directories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-9-download-embedding-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 9: Download Embedding Models
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifying-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifying Installation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Verifying Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-1-check-python-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test 1: Check Python Environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-2-verify-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test 2: Verify Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-3-check-opensearch-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test 3: Check OpenSearch Connection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-4-run-the-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test 4: Run the Application
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-installation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Installation Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Installation Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-python-version-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 1: Python Version Mismatch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-pip-install-fails-with-permission-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 2: pip Install Fails with Permission Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-opensearch-wont-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 3: OpenSearch Won't Start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-modulenotfounderror" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 4: ModuleNotFoundError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-gemini-api-key-not-recognized" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 5: Gemini API Key Not Recognized
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-ssl-certificate-errors-with-opensearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 6: SSL Certificate Errors with OpenSearch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-7-out-of-memory-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 7: Out of Memory Errors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-8-slow-download-of-embedding-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 8: Slow Download of Embedding Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-9-port-7860-already-in-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue 9: Port 7860 Already in Use
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-specific-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform-Specific Notes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Platform-Specific Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      macOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../architecture/overview/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../modules/data-collectors/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Core Modules
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../tutorials/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../deployment/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../database/schema/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Database
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../api/rest-api/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../troubleshooting/common-issues/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../advanced/embedding-models/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Advanced Topics
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../DOCUMENTATION_INDEX/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/yourusername/multi-modal-academic-research-system/edit/main/docs/setup/installation.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/yourusername/multi-modal-academic-research-system/raw/main/docs/setup/installation.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="installation-guide">Installation Guide<a class="headerlink" href="#installation-guide" title="Permanent link">&para;</a></h1>
+<p>Complete step-by-step instructions for installing the Multi-Modal Academic Research System.</p>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#system-requirements">System Requirements</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation-steps">Installation Steps</a></li>
+<li><a href="#verifying-installation">Verifying Installation</a></li>
+<li><a href="#common-installation-issues">Common Installation Issues</a></li>
+<li><a href="#platform-specific-notes">Platform-Specific Notes</a></li>
+</ul>
+<hr />
+<h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="minimum-requirements">Minimum Requirements<a class="headerlink" href="#minimum-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Operating System</strong>: macOS, Linux, or Windows 10/11</li>
+<li><strong>Python</strong>: Python 3.9 or higher (Python 3.11 recommended)</li>
+<li><strong>RAM</strong>: 4GB minimum, 8GB recommended</li>
+<li><strong>Disk Space</strong>: 5GB free space (for dependencies, models, and data)</li>
+<li><strong>Internet</strong>: Stable internet connection for downloading dependencies and API access</li>
+</ul>
+<h3 id="recommended-specifications">Recommended Specifications<a class="headerlink" href="#recommended-specifications" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Python</strong>: Python 3.11.x</li>
+<li><strong>RAM</strong>: 8GB or more (for processing large PDFs and running embedding models)</li>
+<li><strong>Disk Space</strong>: 10GB+ for storing papers, videos, and processed data</li>
+<li><strong>GPU</strong>: Optional, but helpful for faster embedding generation</li>
+</ul>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before installing the Multi-Modal Academic Research System, ensure you have:</p>
+<ol>
+<li>
+<p><strong>Python 3.9+</strong> installed on your system
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>--version<span class="w">  </span><span class="c1"># Should show Python 3.9.x or higher</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>pip</strong> package manager (comes with Python)
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>--version
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Docker</strong> installed (for OpenSearch)</p>
+</li>
+<li>Download from: https://www.docker.com/get-started</li>
+<li>
+<p>Verify installation: <code>docker --version</code></p>
+</li>
+<li>
+<p><strong>Git</strong> (optional, for cloning the repository)
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>--version
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Google Gemini API Key</strong> (free tier available)</p>
+</li>
+<li>Get your key at: https://makersuite.google.com/app/apikey</li>
+<li>No credit card required for the free tier</li>
+</ol>
+<hr />
+<h2 id="installation-steps">Installation Steps<a class="headerlink" href="#installation-steps" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-clone-or-download-the-repository">Step 1: Clone or Download the Repository<a class="headerlink" href="#step-1-clone-or-download-the-repository" title="Permanent link">&para;</a></h3>
+<p><strong>Option A: Using Git</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>&lt;repository-url&gt;
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>multi-modal-academic-research-system
+</span></code></pre></div></p>
+<p><strong>Option B: Download ZIP</strong>
+- Download and extract the project ZIP file
+- Navigate to the extracted directory</p>
+<h3 id="step-2-create-a-virtual-environment">Step 2: Create a Virtual Environment<a class="headerlink" href="#step-2-create-a-virtual-environment" title="Permanent link">&para;</a></h3>
+<p>Creating a virtual environment isolates the project dependencies from your system Python.</p>
+<p><strong>macOS/Linux:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span></code></pre></div></p>
+<p><strong>Windows:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span></code></pre></div></p>
+<h3 id="step-3-activate-the-virtual-environment">Step 3: Activate the Virtual Environment<a class="headerlink" href="#step-3-activate-the-virtual-environment" title="Permanent link">&para;</a></h3>
+<p><strong>macOS/Linux:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</span></code></pre></div></p>
+<p><strong>Windows Command Prompt:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+</span></code></pre></div></p>
+<p><strong>Windows PowerShell:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>venv<span class="se">\S</span>cripts<span class="se">\A</span>ctivate.ps1
+</span></code></pre></div></p>
+<p>You should see <code>(venv)</code> prepended to your command prompt, indicating the virtual environment is active.</p>
+<h3 id="step-4-upgrade-pip-recommended">Step 4: Upgrade pip (Recommended)<a class="headerlink" href="#step-4-upgrade-pip-recommended" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span></code></pre></div>
+<h3 id="step-5-install-python-dependencies">Step 5: Install Python Dependencies<a class="headerlink" href="#step-5-install-python-dependencies" title="Permanent link">&para;</a></h3>
+<p>Install all required packages from <code>requirements.txt</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<p>This will install approximately 30+ packages including:
+- OpenSearch client
+- LangChain and Google Gemini integration
+- Gradio for the web UI
+- PDF processing libraries
+- YouTube and podcast collectors
+- Sentence transformers for embeddings
+- And many more...</p>
+<p><strong>Expected installation time</strong>: 5-10 minutes depending on your internet connection.</p>
+<h3 id="step-6-configure-environment-variables">Step 6: Configure Environment Variables<a class="headerlink" href="#step-6-configure-environment-variables" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Copy the example environment file:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Edit the <code>.env</code> file with your preferred text editor:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># On macOS/Linux</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>nano<span class="w"> </span>.env
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Or use any text editor</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>code<span class="w"> </span>.env<span class="w">  </span><span class="c1"># VS Code</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>vim<span class="w"> </span>.env<span class="w">   </span><span class="c1"># Vim</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Add your Gemini API key:
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>GEMINI_API_KEY=your_actual_api_key_here
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>OPENSEARCH_HOST=localhost
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>OPENSEARCH_PORT=9200
+</span></code></pre></div></p>
+</li>
+</ol>
+<h3 id="step-7-start-opensearch">Step 7: Start OpenSearch<a class="headerlink" href="#step-7-start-opensearch" title="Permanent link">&para;</a></h3>
+<p>OpenSearch is required for indexing and searching academic content.</p>
+<p><strong>Using Docker (Recommended):</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>--name<span class="w"> </span>opensearch-research<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">9200</span>:9200<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">9600</span>:9600<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span>-e<span class="w"> </span><span class="s2">&quot;discovery.type=single-node&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span>-e<span class="w"> </span><span class="s2">&quot;OPENSEARCH_INITIAL_ADMIN_PASSWORD=MyStrongPassword@2024!&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">  </span>opensearchproject/opensearch:latest
+</span></code></pre></div>
+<p><strong>Verify OpenSearch is running:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>https://localhost:9200<span class="w"> </span>-ku<span class="w"> </span>admin:MyStrongPassword@2024!
+</span></code></pre></div></p>
+<p>You should see JSON output with cluster information.</p>
+<h3 id="step-8-initialize-data-directories">Step 8: Initialize Data Directories<a class="headerlink" href="#step-8-initialize-data-directories" title="Permanent link">&para;</a></h3>
+<p>The application will create these automatically, but you can create them manually:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>data/papers<span class="w"> </span>data/videos<span class="w"> </span>data/podcasts<span class="w"> </span>data/processed
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>logs<span class="w"> </span>configs
+</span></code></pre></div>
+<h3 id="step-9-download-embedding-models">Step 9: Download Embedding Models<a class="headerlink" href="#step-9-download-embedding-models" title="Permanent link">&para;</a></h3>
+<p>On first run, the sentence transformer model will be downloaded automatically (~90MB). To download it now:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from sentence_transformers import SentenceTransformer; SentenceTransformer(&#39;all-MiniLM-L6-v2&#39;)&quot;</span>
+</span></code></pre></div>
+<hr />
+<h2 id="verifying-installation">Verifying Installation<a class="headerlink" href="#verifying-installation" title="Permanent link">&para;</a></h2>
+<h3 id="test-1-check-python-environment">Test 1: Check Python Environment<a class="headerlink" href="#test-1-check-python-environment" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys; print(f&#39;Python {sys.version}&#39;)&quot;</span>
+</span></code></pre></div>
+<h3 id="test-2-verify-dependencies">Test 2: Verify Dependencies<a class="headerlink" href="#test-2-verify-dependencies" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import opensearchpy, langchain, gradio, google.generativeai; print(&#39;All core dependencies installed successfully&#39;)&quot;</span>
+</span></code></pre></div>
+<h3 id="test-3-check-opensearch-connection">Test 3: Check OpenSearch Connection<a class="headerlink" href="#test-3-check-opensearch-connection" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from opensearchpy import OpenSearch; client = OpenSearch(hosts=[{&#39;host&#39;: &#39;localhost&#39;, &#39;port&#39;: 9200}], http_auth=(&#39;admin&#39;, &#39;MyStrongPassword@2024!&#39;), use_ssl=True, verify_certs=False); print(client.info())&quot;</span>
+</span></code></pre></div>
+<h3 id="test-4-run-the-application">Test 4: Run the Application<a class="headerlink" href="#test-4-run-the-application" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>python<span class="w"> </span>main.py
+</span></code></pre></div>
+<p>You should see:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>🚀 Initializing Multi-Modal Research Assistant...
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>✅ Connected to OpenSearch at localhost:9200
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>✅ Research Assistant ready!
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>🌐 Opening web interface...
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>Running on local URL:  http://0.0.0.0:7860
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>Running on public URL: https://[random-id].gradio.live
+</span></code></pre></div></p>
+<p>Open the local URL in your browser. If you see the Research Assistant interface, installation is complete!</p>
+<hr />
+<h2 id="common-installation-issues">Common Installation Issues<a class="headerlink" href="#common-installation-issues" title="Permanent link">&para;</a></h2>
+<h3 id="issue-1-python-version-mismatch">Issue 1: Python Version Mismatch<a class="headerlink" href="#issue-1-python-version-mismatch" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: <code>python --version</code> shows Python 2.x or Python &lt; 3.9</p>
+<p><strong>Solution</strong>:
+- Try <code>python3 --version</code> instead
+- Use <code>python3</code> and <code>pip3</code> commands throughout installation
+- Install Python 3.11 from python.org</p>
+<h3 id="issue-2-pip-install-fails-with-permission-error">Issue 2: pip Install Fails with Permission Error<a class="headerlink" href="#issue-2-pip-install-fails-with-permission-error" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: <code>ERROR: Could not install packages due to an EnvironmentError: [Errno 13] Permission denied</code></p>
+<p><strong>Solution</strong>:
+- Ensure virtual environment is activated (you should see <code>(venv)</code>)
+- If not in venv: Activate it again: <code>source venv/bin/activate</code>
+- Never use <code>sudo pip install</code> - this can break your system Python</p>
+<h3 id="issue-3-opensearch-wont-start">Issue 3: OpenSearch Won't Start<a class="headerlink" href="#issue-3-opensearch-wont-start" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: Docker container fails or port 9200 is already in use</p>
+<p><strong>Solutions</strong>:
+1. Check if OpenSearch is already running:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>opensearch
+</span></code></pre></div></p>
+<ol>
+<li>
+<p>Stop existing container:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>docker<span class="w"> </span>stop<span class="w"> </span>opensearch-research
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>opensearch-research
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Check if port 9200 is in use:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># macOS/Linux</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>lsof<span class="w"> </span>-i<span class="w"> </span>:9200
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1"># Windows</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>netstat<span class="w"> </span>-ano<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span>:9200
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Use a different port if needed (update <code>.env</code> file):
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">9201</span>:9200<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;discovery.type=single-node&quot;</span><span class="w"> </span>opensearchproject/opensearch:latest
+</span></code></pre></div>
+   Then set <code>OPENSEARCH_PORT=9201</code> in <code>.env</code></p>
+</li>
+</ol>
+<h3 id="issue-4-modulenotfounderror">Issue 4: ModuleNotFoundError<a class="headerlink" href="#issue-4-modulenotfounderror" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: <code>ModuleNotFoundError: No module named 'opensearchpy'</code> (or other package)</p>
+<p><strong>Solutions</strong>:
+1. Verify virtual environment is active:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>which<span class="w"> </span>python<span class="w">  </span><span class="c1"># Should show path to venv/bin/python</span>
+</span></code></pre></div></p>
+<ol>
+<li>
+<p>Reinstall requirements:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Install missing package individually:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>pip<span class="w"> </span>install<span class="w"> </span>opensearch-py
+</span></code></pre></div></p>
+</li>
+</ol>
+<h3 id="issue-5-gemini-api-key-not-recognized">Issue 5: Gemini API Key Not Recognized<a class="headerlink" href="#issue-5-gemini-api-key-not-recognized" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: <code>⚠️  Please set GEMINI_API_KEY in your .env file</code></p>
+<p><strong>Solutions</strong>:
+1. Verify <code>.env</code> file exists in project root:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>.env
+</span></code></pre></div></p>
+<ol>
+<li>
+<p>Check the file content (key should not have quotes):
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a># Correct
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>GEMINI_API_KEY=AIzaSyAbc123...
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a># Incorrect
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>GEMINI_API_KEY=&quot;AIzaSyAbc123...&quot;  # Remove quotes
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Ensure no trailing spaces or newlines</p>
+</li>
+<li>
+<p>Restart the application after editing <code>.env</code></p>
+</li>
+</ol>
+<h3 id="issue-6-ssl-certificate-errors-with-opensearch">Issue 6: SSL Certificate Errors with OpenSearch<a class="headerlink" href="#issue-6-ssl-certificate-errors-with-opensearch" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: <code>SSL: CERTIFICATE_VERIFY_FAILED</code> errors</p>
+<p><strong>Solution</strong>: The application already disables SSL verification for local OpenSearch. If issues persist:
+1. Check firewall settings
+2. Verify OpenSearch container is running: <code>docker ps</code>
+3. Try accessing OpenSearch directly: <code>curl -k https://localhost:9200</code></p>
+<h3 id="issue-7-out-of-memory-errors">Issue 7: Out of Memory Errors<a class="headerlink" href="#issue-7-out-of-memory-errors" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: System runs out of memory during PDF processing or embedding generation</p>
+<p><strong>Solutions</strong>:
+1. Close other applications
+2. Process fewer documents at once
+3. Restart the application
+4. Increase Docker memory limits if using Docker Desktop</p>
+<h3 id="issue-8-slow-download-of-embedding-models">Issue 8: Slow Download of Embedding Models<a class="headerlink" href="#issue-8-slow-download-of-embedding-models" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: First run takes very long downloading models</p>
+<p><strong>Solution</strong>:
+- Be patient - the all-MiniLM-L6-v2 model is ~90MB
+- Check internet connection
+- Download manually using the command in Step 9
+- The model is cached locally after first download</p>
+<h3 id="issue-9-port-7860-already-in-use">Issue 9: Port 7860 Already in Use<a class="headerlink" href="#issue-9-port-7860-already-in-use" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: Gradio cannot start because port 7860 is occupied</p>
+<p><strong>Solution</strong>:
+1. Find what's using the port:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># macOS/Linux</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>lsof<span class="w"> </span>-i<span class="w"> </span>:7860
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="c1"># Windows</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>netstat<span class="w"> </span>-ano<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span>:7860
+</span></code></pre></div></p>
+<ol>
+<li>Kill the process or modify <code>main.py</code> to use a different port:
+   <div class="language-python highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">app</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>    <span class="n">server_name</span><span class="o">=</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>    <span class="n">server_port</span><span class="o">=</span><span class="mi">7861</span><span class="p">,</span>  <span class="c1"># Changed port</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>    <span class="n">share</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="p">)</span>
+</span></code></pre></div></li>
+</ol>
+<hr />
+<h2 id="platform-specific-notes">Platform-Specific Notes<a class="headerlink" href="#platform-specific-notes" title="Permanent link">&para;</a></h2>
+<h3 id="macos">macOS<a class="headerlink" href="#macos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>M1/M2 Macs</strong>: All dependencies are compatible with ARM architecture</li>
+<li><strong>Rosetta</strong>: Not required; native ARM support available</li>
+<li><strong>Permission Issues</strong>: You may need to allow terminal to access folders in System Preferences</li>
+</ul>
+<h3 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Ubuntu/Debian</strong>: Install system dependencies:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-dev<span class="w"> </span>python3-pip<span class="w"> </span>python3-venv
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Fedora/RHEL</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>python3-devel<span class="w"> </span>python3-pip
+</span></code></pre></div></p>
+</li>
+</ul>
+<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>PowerShell Execution Policy</strong>: If activation fails:
+  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="nb">Set-ExecutionPolicy</span> <span class="n">-ExecutionPolicy</span> <span class="n">RemoteSigned</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Long Path Support</strong>: Enable long paths in Windows (required for some packages):</p>
+</li>
+<li>
+<p>Run as Administrator:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>reg add &quot;HKLM\SYSTEM\CurrentControlSet\Control\FileSystem&quot; /v LongPathsEnabled /t REG_DWORD /d 1 /f
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Visual C++ Redistributables</strong>: Some packages require Visual Studio build tools:</p>
+</li>
+<li>Download from: https://visualstudio.microsoft.com/visual-cpp-build-tools/</li>
+</ul>
+<hr />
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>After successful installation:</p>
+<ol>
+<li><strong>Quick Start</strong>: Follow the <a href="../quick-start/">Quick Start Guide</a> to run your first query</li>
+<li><strong>Configuration</strong>: Review the <a href="../configuration/">Configuration Guide</a> for advanced settings</li>
+<li><strong>Architecture</strong>: Learn about the system in the <a href="../../architecture/technology-stack/">Technology Stack</a> document</li>
+</ol>
+<hr />
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>If you encounter issues not covered here:</p>
+<ol>
+<li>Check the logs in the <code>logs/</code> directory</li>
+<li>Review the <a href="../configuration/">Configuration Guide</a></li>
+<li>Consult the main <a href="../../CLAUDE.md">CLAUDE.md</a> file</li>
+<li>Check GitHub issues or create a new one</li>
+</ol>
+<hr />
+<p><strong>Installation complete! You're ready to start researching with your Multi-Modal Academic Research System.</strong></p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../quick-start/" class="md-footer__link md-footer__link--next" aria-label="Next: Quick Start">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Quick Start
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Multi-Modal Research Team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/yourusername/multi-modal-academic-research-system" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://pypi.org/project/multi-modal-research/" target="_blank" rel="noopener" title="pypi.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6M286.2 444.7a20.4 20.4 0 1 1 0-40.7 20.4 20.4 0 1 1 0 40.7M167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4m-6.6-183.4a20.4 20.4 0 1 1 0 40.8 20.4 20.4 0 1 1 0-40.8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
