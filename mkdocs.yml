@@ -1,0 +1,228 @@
+# MkDocs Configuration for Multi-Modal Academic Research System
+site_name: Multi-Modal Academic Research System
+site_description: Comprehensive documentation for the Multi-Modal Academic Research System - A Python application for collecting, processing, and querying academic content using RAG with OpenSearch and Google Gemini.
+site_author: Development Team
+site_url: https://yourdomain.com/docs
+
+# Repository
+repo_name: multi-modal-research
+repo_url: https://github.com/yourusername/multi-modal-academic-research-system
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: Copyright &copy; 2024 Multi-Modal Research Team
+
+# Theme Configuration
+theme:
+  name: material
+
+  # Color Palette
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  # Font
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+  # Logo and favicon
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+
+  # Features
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+    - content.tooltips
+    - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - toc.integrate
+
+  # Custom CSS
+  extra_css:
+    - stylesheets/extra.css
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+      lang:
+        - en
+  # - minify:
+  #     minify_html: true
+  #     minify_js: true
+  #     minify_css: true
+  # - git-revision-date-localized:
+  #     enable_creation_date: true
+  #     type: timeago
+  - tags:
+      tags_file: tags.md
+
+# Extensions
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+  # PyMdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Extra JavaScript
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# Extra
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/multi-modal-academic-research-system
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/multi-modal-research/
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+# Navigation Structure
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Overview: README.md
+      - Installation: setup/installation.md
+      - Quick Start: setup/quick-start.md
+      - Configuration: setup/configuration.md
+
+  - Architecture:
+      - System Overview: architecture/overview.md
+      - Data Flow: architecture/data-flow.md
+      - Technology Stack: architecture/technology-stack.md
+
+  - Core Modules:
+      - Data Collectors: modules/data-collectors.md
+      - Data Processors: modules/data-processors.md
+      - Indexing System: modules/indexing.md
+      - Database: modules/database.md
+      - API Server: modules/api.md
+      - Orchestration: modules/orchestration.md
+      - User Interface: modules/ui.md
+
+  - Tutorials:
+      - Overview: tutorials/README.md
+      - Collecting Papers: tutorials/collect-papers.md
+      - Custom Searches: tutorials/custom-searches.md
+      - Export Citations: tutorials/export-citations.md
+      - Visualization: tutorials/visualization.md
+      - Extending System: tutorials/extending.md
+
+  - Deployment:
+      - Overview: deployment/README.md
+      - Local Setup: deployment/local.md
+      - Docker: deployment/docker.md
+      - OpenSearch: deployment/opensearch.md
+      - Production: deployment/production.md
+
+  - Database:
+      - Schema Overview: database/schema.md
+      - Collections Table: database/collections-table.md
+      - Type-Specific Tables: database/type-tables.md
+
+  - API Reference:
+      - REST API: api/rest-api.md
+      - Database API: api/database-api.md
+
+  - Troubleshooting:
+      - Common Issues: troubleshooting/common-issues.md
+      - OpenSearch: troubleshooting/opensearch.md
+      - API Errors: troubleshooting/api-errors.md
+      - FAQ: troubleshooting/faq.md
+
+  - Advanced Topics:
+      - Embedding Models: advanced/embedding-models.md
+      - Hybrid Search: advanced/hybrid-search.md
+      - Gemini Integration: advanced/gemini.md
+      - Performance: advanced/performance.md
+      - Custom Collectors: advanced/custom-collectors.md
+
+  - Reference:
+      - Documentation Index: DOCUMENTATION_INDEX.md
+      - Documentation Summary: DOCUMENTATION_SUMMARY.md

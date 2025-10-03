@@ -67,7 +67,25 @@ The Gradio UI will open at `http://localhost:7860`
 
 ## 📚 Documentation
 
-### 📘 Complete Documentation Index
+### 📘 Documentation Options
+
+**Option 1: Interactive Documentation Site (Recommended)**
+```bash
+# Serve documentation with live search and navigation
+./serve_docs.sh  # Linux/Mac
+serve_docs.bat   # Windows
+
+# Visit http://127.0.0.1:8000
+```
+
+Built with **MkDocs Material** theme featuring:
+- 🔍 Full-text search
+- 🎨 Dark/light mode
+- 📱 Mobile responsive
+- 🔗 Auto-generated navigation
+- 📊 Built-in analytics
+
+**Option 2: Static Documentation**
 
 **[View Full Documentation →](docs/README.md)**
 
